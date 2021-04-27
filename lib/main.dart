@@ -4,7 +4,6 @@ import 'package:magical_button/3d_button.dart';
 void main() {
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
