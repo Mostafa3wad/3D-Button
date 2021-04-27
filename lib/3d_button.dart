@@ -5,14 +5,15 @@ class MyButton extends StatefulWidget {
   Widget child;
   Function onTap;
   Color color;
-  final double width, height;
-  MyButton(
-      {this.child,
-      @required this.onTap,
-      this.color = Colors.blueGrey,
-      this.height = 40,
-      this.width = 160,
-      });
+  final double width, height, buttonHeight;
+  MyButton({
+    this.child,
+    @required this.onTap,
+    this.color = Colors.blueGrey,
+    this.height = 40,
+    this.width = 160,
+    this.buttonHeight = 5
+  });
   @override
   _MyButtonState createState() => _MyButtonState();
 }
@@ -54,11 +55,11 @@ class _MyButtonState extends State<MyButton> {
         },
         child: Container(
           width: widget.width,
-          height: widget.height+20,
+          height: widget.height + 20,
           child: Stack(
             children: [
               Positioned(
-                  bottom: 5,
+                  bottom: widget.buttonHeight,
                   child: Container(
                     width: widget.width,
                     height: widget.height,
@@ -72,11 +73,11 @@ class _MyButtonState extends State<MyButton> {
                 duration: Duration(milliseconds: 400),
                 curve: Curves.bounceOut,
                 child: AnimatedContainer(
-                  alignment: Alignment.center,
+                    alignment: Alignment.center,
                     duration: Duration(milliseconds: 400),
                     curve: Curves.bounceOut,
                     width: widget.width,
-                    height: widget.height+5,
+                    height: widget.height + 5,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
