@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               ),
               buttonHeight: 100,
               buttonWidth: 300,
-              thickHeight: 40,
+              thickness: 40,
               onPressed: () {},
             ),
           ),

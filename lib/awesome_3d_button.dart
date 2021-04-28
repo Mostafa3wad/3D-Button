@@ -5,7 +5,7 @@ import 'package:magical_button/button_state_notifier.dart';
 class Awesome3DButton extends StatelessWidget {
   final double buttonWidth;
   final double buttonHeight;
-  final double thickHeight;
+  final double thickness;
 
   final Color buttonColor;
   final Widget buttonChild;
@@ -15,7 +15,7 @@ class Awesome3DButton extends StatelessWidget {
   const Awesome3DButton({
     this.buttonHeight = 40,
     this.buttonWidth = 160,
-    this.thickHeight=5,
+    this.thickness = 5,
     this.buttonColor = const Color(0xffa7337a),
     @required this.buttonChild,
     @required this.onPressed,
@@ -23,34 +23,34 @@ class Awesome3DButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var buttonStateNotifier = ButtonStateNotifier(thickHeight);
-    return AnimatedBuilder(
-      animation: buttonStateNotifier,
-      builder: (ctx, value) {
-        return GestureDetector(
-          onTap: onPressed,
-          onTapDown: (_) => buttonStateNotifier.triggerButtonDown(thickHeight),
-          onTapUp: (_) => buttonStateNotifier.triggerButtonUp(),
-          child: MouseRegion(
-            onHover: (_) => buttonStateNotifier.triggerOnMouseHover(),
-            onExit: (_) => buttonStateNotifier.triggerOnMouseExit(),
-            child: Container(
-              width: buttonWidth,
-              height: buttonHeight + thickHeight,
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: buttonWidth,
-                      height: buttonHeight,
-                      decoration: BoxDecoration(
-                        color: buttonColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
+    var buttonStateNotifier = ButtonStateNotifier(thickness);
+    return GestureDetector(
+      onTap: onPressed,
+      onTapDown: (_) => buttonStateNotifier.triggerButtonDown(),
+      onTapUp: (_) => buttonStateNotifier.triggerButtonUp(),
+      child: MouseRegion(
+        onHover: (_) => buttonStateNotifier.triggerOnMouseHover(),
+        onExit: (_) => buttonStateNotifier.triggerOnMouseExit(),
+        child: Container(
+          width: buttonWidth,
+          height: buttonHeight + thickness,
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  width: buttonWidth,
+                  height: buttonHeight,
+                  decoration: BoxDecoration(
+                    color: buttonColor,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  AnimatedPositioned(
+                ),
+              ),
+              AnimatedBuilder(
+                animation: buttonStateNotifier,
+                builder: (ctx, value) {
+                  return AnimatedPositioned(
                     top: buttonStateNotifier.topPosition,
                     duration: const Duration(milliseconds: 400),
                     curve: Curves.bounceOut,
@@ -66,7 +66,7 @@ class Awesome3DButton extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         color: buttonColor,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black12,
@@ -76,13 +76,13 @@ class Awesome3DButton extends StatelessWidget {
                       ),
                       child: buttonChild,
                     ),
-                  )
-                ],
+                  );
+                },
               ),
-            ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
